@@ -2,6 +2,8 @@
 
 
 #include "Items/Item.h"
+#include "Slash/DebugMacros.h"
+
 
 // Sets default values
 AItem::AItem()
@@ -16,12 +18,18 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("Begin Play called!"));
+	UWorld* World = GetWorld();
+	FVector Location = GetActorLocation();
+	FVector Forward = GetActorForwardVector();
 
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, TEXT("We are using Item.cpp"));
-	}
+	DRAW_SPHERE(Location);
+	// DRAW_LINE(Location, Location + Forward * 100.f);
+	// DRAW_POINT(Location + Forward * 100.f);
+	DRAW_VECTOR(Location, Location + Forward * 100.f);
+
+	
+
+	
 	
 }
 
@@ -29,14 +37,5 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	UE_LOG(LogTemp, Warning, TEXT("DeltaTime: %f"), DeltaTime);
-
-	if (GEngine)
-	{
-		FString Message = FString::Printf(TEXT("DeltaTime: %f"), DeltaTime);
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, Message);
-	}
-
 }
 
