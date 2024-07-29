@@ -8,6 +8,8 @@
 
 class UCapsuleComponent;
 class USkeletalMeshComponent;
+class USpringArmComponent;
+class UCameraComponent;
 
 UCLASS()
 class SLASH_API ABird : public APawn
@@ -26,10 +28,19 @@ protected:
 
 	void MoveForward(float Value);
 
+	void Turn(float Value);
+	void LookUp(float Value);
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	UCapsuleComponent* Capsule;
 
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* BirdMesh;
+
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* CameraBoom;
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* ViewCamera;
 };
